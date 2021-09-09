@@ -64,7 +64,7 @@ contract OptimizerStrategy is IOptimizerStrategy {
         governance = msg.sender;
 
         require(_maxTwapDeviation >= 0, "maxTwapDeviation");
-        require(_twapDuration > 0, "twapDuration");
+        require(_twapDuration >= 100, "twapDuration");
         require(_priceImpactPercentage < 1e6 && _priceImpactPercentage > 0, "PIP");
         require(maxTotalSupply > 0, "maxTotalSupply");
     }
@@ -80,7 +80,7 @@ contract OptimizerStrategy is IOptimizerStrategy {
     }
 
     function setTwapDuration(uint32 _twapDuration) external onlyGovernance {
-        require(_twapDuration > 0, "twapDuration");
+        require(_twapDuration >= 100, "twapDuration");
         twapDuration = _twapDuration;
     }
 
