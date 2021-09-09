@@ -23,6 +23,7 @@ contract OptimizerStrategy is IOptimizerStrategy {
     /// @inheritdoc IOptimizerStrategy
     uint24 public override priceImpactPercentage;
     
+    event TransferGovernance(address indexed previousGovernance, address indexed newGovernance);
     
     /**
      * @param _twapDuration TWAP duration in seconds for rebalance check
@@ -95,6 +96,8 @@ contract OptimizerStrategy is IOptimizerStrategy {
      */
     function acceptGovernance() external {
         require(msg.sender == pendingGovernance, "PG");
+        emit TransferGovernance(governance, pendingGovernance);
+        pendingGovernance = address(0);
         governance = msg.sender;
     }
 }
