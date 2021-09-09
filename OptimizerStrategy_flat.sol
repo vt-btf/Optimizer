@@ -63,7 +63,7 @@ contract OptimizerStrategy is IOptimizerStrategy {
         maxTotalSupply = _maxTotalSupply;
         governance = msg.sender;
 
-        require(_maxTwapDeviation >= 0, "maxTwapDeviation");
+        require(_maxTwapDeviation >= 20, "maxTwapDeviation");
         require(_twapDuration >= 100, "twapDuration");
         require(_priceImpactPercentage < 1e6 && _priceImpactPercentage > 0, "PIP");
         require(maxTotalSupply > 0, "maxTotalSupply");
@@ -85,7 +85,7 @@ contract OptimizerStrategy is IOptimizerStrategy {
     }
 
     function setMaxTwapDeviation(int24 _maxTwapDeviation) external onlyGovernance {
-        require(_maxTwapDeviation > 0, "PF");
+        require(_maxTwapDeviation >= 20, "PF");
         maxTwapDeviation = _maxTwapDeviation;
     }
 
